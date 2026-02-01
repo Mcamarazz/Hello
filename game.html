@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soul Chronicles - Monde de Jeu</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="game-layout">
+        <!-- Sidebar: Player Info -->
+        <aside class="sidebar">
+            <div class="char-card">
+                <div class="avatar-frame">
+                    <img src="images/avatar.jpg" alt="Player Avatar" id="playerAvatar">
+                    <div class="level-badge" id="playerLevel">1</div>
+                </div>
+                <h2 id="playerName">Guerrier</h2>
+                <p id="playerRank" style="color: var(--secondary); font-size: 0.9rem;">Novice</p>
+            </div>
+
+            <div class="resource-bars">
+                <div class="bar-container">
+                    <div class="bar-label">
+                        <span>XP</span>
+                        <span id="xpText">0/100</span>
+                    </div>
+                    <div class="progress-bg">
+                        <div class="progress-fill xp-fill" id="xpBar" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div class="bar-container">
+                    <div class="bar-label">
+                        <span>Santé</span>
+                        <span id="hpText">100/100</span>
+                    </div>
+                    <div class="progress-bg">
+                        <div class="progress-fill hp-fill" id="hpBar" style="width: 100%"></div>
+                    </div>
+                </div>
+                <div class="bar-container">
+                    <div class="bar-label">
+                        <span>Énergie (Qi)</span>
+                        <span id="enText">50/50</span>
+                    </div>
+                    <div class="progress-bg">
+                        <div class="progress-fill en-fill" id="enBar" style="width: 100%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="char-stats">
+                <div class="stat-row">
+                    <span class="stat-label">Force</span>
+                    <span class="stat-val" id="statStr">10</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Agilité</span>
+                    <span class="stat-val" id="statAgi">10</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Intelligence</span>
+                    <span class="stat-val" id="statInt">10</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Puissance</span>
+                    <span class="stat-val" id="statPower">30</span>
+                </div>
+            </div>
+
+            <nav class="nav-menu">
+                <button class="nav-item active" data-target="training">
+                    <i class="fas fa-dumbbell"></i> Entraînement
+                </button>
+                <button class="nav-item" data-target="missions">
+                    <i class="fas fa-scroll"></i> Missions
+                </button>
+                <button class="nav-item" data-target="skills">
+                    <i class="fas fa-fire"></i> Techniques & Éveils
+                </button>
+                <button class="nav-item" data-target="arena">
+                    <i class="fas fa-swords"></i> Arène de Combat
+                </button>
+                <button class="nav-item" data-target="leaderboard">
+                    <i class="fas fa-trophy"></i> Classement Mondial
+                </button>
+                <button class="nav-item" data-target="clan">
+                    <i class="fas fa-users"></i> Mon Clan
+                </button>
+                <button class="nav-item" id="logoutBtn">
+                    <i class="fas fa-sign-out-alt"></i> Déconnexion
+                </button>
+            </nav>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            
+            <!-- SECTION: TRAINING -->
+            <section id="training" class="game-section active">
+                <div class="section-header">
+                    <h2><i class="fas fa-khanda"></i> Terrain d'Entraînement</h2>
+                    <div style="font-size: 0.9rem; color: #b2bec3;">Dépensez du Qi pour augmenter vos stats.</div>
+                </div>
+
+                <div class="training-grid">
+                    <div class="training-card" onclick="game.train('str')">
+                        <div class="training-icon"><i class="fas fa-fist-raised"></i></div>
+                        <h3>Renforcement</h3>
+                        <p>+ Force / + XP</p>
+                        <p style="color: #74b9ff; font-size: 0.8rem">Coût: 5 Qi</p>
+                        <button class="training-btn">S'entraîner</button>
+                    </div>
+
+                    <div class="training-card" onclick="game.train('agi')">
+                        <div class="training-icon"><i class="fas fa-wind"></i></div>
+                        <h3>Vélocité</h3>
+                        <p>+ Agilité / + XP</p>
+                        <p style="color: #74b9ff; font-size: 0.8rem">Coût: 5 Qi</p>
+                        <button class="training-btn">S'entraîner</button>
+                    </div>
+
+                    <div class="training-card" onclick="game.train('int')">
+                        <div class="training-icon"><i class="fas fa-brain"></i></div>
+                        <h3>Méditation</h3>
+                        <p>+ Intelligence / + XP</p>
+                        <p style="color: #74b9ff; font-size: 0.8rem">Coût: 5 Qi</p>
+                        <button class="training-btn">S'entraîner</button>
+                    </div>
+
+                    <div class="training-card" onclick="game.meditate()">
+                        <div class="training-icon"><i class="fas fa-yin-yang"></i></div>
+                        <h3>Récupération</h3>
+                        <p>+ Énergie Qi</p>
+                        <p style="color: var(--success); font-size: 0.8rem">Regain Rapide</p>
+                        <button class="training-btn">Méditer</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION: MISSIONS -->
+            <section id="missions" class="game-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-scroll"></i> Missions de Guilde</h2>
+                    <div style="font-size: 0.9rem; color: #b2bec3;">Accomplissez des tâches pour gagner des ressources.</div>
+                </div>
+
+                <div class="mission-list" id="missionList">
+                    <!-- Missions will be generated by JS -->
+                </div>
+            </section>
+
+            <!-- SECTION: SKILLS -->
+            <section id="skills" class="game-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-fire"></i> Techniques & Éveils</h2>
+                    <div style="font-size: 0.9rem; color: #b2bec3;">Débloquez des pouvoirs uniques selon votre niveau.</div>
+                </div>
+
+                <div class="skills-grid" id="skillsGrid">
+                    <!-- Skills will be generated by JS -->
+                </div>
+            </section>
+
+            <!-- SECTION: ARENA -->
+            <section id="arena" class="game-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-skull"></i> Arène PVP</h2>
+                    <button class="action-btn" id="findMatchBtn" style="width: auto; padding: 8px 20px;">Trouver un Adversaire</button>
+                </div>
+
+                <div id="combatView" style="display: none;">
+                    <div class="arena-container">
+                        <div class="fighter-card">
+                            <img src="images/avatar.jpg" class="fighter-img" id="combatPlayerImg">
+                            <h3 id="combatPlayerName">Vous</h3>
+                            <div class="progress-bg" style="margin-top: 5px;">
+                                <div class="progress-fill hp-fill" id="combatPlayerHp" style="width: 100%"></div>
+                            </div>
+                        </div>
+
+                        <div class="vs-badge">VS</div>
+
+                        <div class="fighter-card enemy">
+                            <img src="images/enemy.jpg" class="fighter-img" id="combatEnemyImg">
+                            <h3 id="combatEnemyName">Adversaire</h3>
+                            <p style="font-size: 0.8rem; color: #ff7675;">Niveau <span id="combatEnemyLvl">5</span></p>
+                            <div class="progress-bg" style="margin-top: 5px;">
+                                <div class="progress-fill hp-fill" id="combatEnemyHp" style="width: 100%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="text-align: center; margin-bottom: 1rem;">
+                        <p style="margin-bottom: 5px;">Choisissez votre posture de combat :</p>
+                        <div class="stance-selector">
+                            <button class="stance-btn active" onclick="game.setStance('offensive')" data-stance="offensive">Offensive</button>
+                            <button class="stance-btn" onclick="game.setStance('defensive')" data-stance="defensive">Défensive</button>
+                            <button class="stance-btn" onclick="game.setStance('tactical')" data-stance="tactical">Tactique</button>
+                        </div>
+                        <div id="transformationArea" style="margin-top: 10px; display: none;">
+                            <button class="action-btn glow-btn" id="transformBtn" style="background: linear-gradient(45deg, #fd79a8, #e84393); font-size: 0.8rem; padding: 8px;">ÉVEIL SPIRITUEL</button>
+                        </div>
+                    </div>
+
+                    <div class="combat-log" id="combatLog">
+                        <div class="log-entry info">En attente du combat...</div>
+                    </div>
+
+                    <button class="action-btn" id="attackBtn" style="margin-top: 1rem;">LANCER L'ASSAUT</button>
+                </div>
+                
+                <div id="arenaLobby" style="text-align: center; padding: 3rem;">
+                    <i class="fas fa-search" style="font-size: 3rem; color: rgba(255,255,255,0.2); margin-bottom: 1rem;"></i>
+                    <p>Recherchez un adversaire pour prouver votre valeur.</p>
+                </div>
+            </section>
+
+            <!-- SECTION: LEADERBOARD -->
+            <section id="leaderboard" class="game-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-globe"></i> Classement Mondial</h2>
+                    <div class="filter-group">
+                        <select id="leaderboardFilter" onchange="game.populateLeaderboard(this.value)">
+                            <option value="Global">Monde Entier</option>
+                            <option value="France">France</option>
+                            <option value="Japan">Japon</option>
+                            <option value="USA">USA</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div style="background: rgba(0,0,0,0.3); border-radius: 8px; overflow: hidden;">
+                    <table class="leaderboard-table">
+                        <thead>
+                            <tr>
+                                <th>Rang</th>
+                                <th>Joueur</th>
+                                <th>Pays</th>
+                                <th>Niveau</th>
+                                <th>Puissance</th>
+                            </tr>
+                        </thead>
+                        <tbody id="leaderboardBody">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- SECTION: CLAN -->
+            <section id="clan" class="game-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-users"></i> Mon Clan</h2>
+                    <div style="font-size: 0.9rem; color: #b2bec3;">Unissez-vous pour dominer le monde.</div>
+                </div>
+                
+                <div id="clanContent">
+                    <!-- Populated by JS -->
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Right Panel: Global Chat -->
+        <aside class="right-panel">
+            <h3 style="margin-bottom: 1rem; color: var(--secondary); font-size: 0.9rem;">CHAT MONDE (Live)</h3>
+            <div class="world-chat">
+                <div class="chat-messages" id="chatBox">
+                    <!-- Chat populated by JS -->
+                </div>
+                <input type="text" class="chat-input" placeholder="Message..." id="chatInput">
+            </div>
+            
+            <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p style="font-size: 0.8rem; color: #b2bec3;">Joueurs en ligne: <span style="color: var(--success)">14,532</span></p>
+                <p style="font-size: 0.8rem; color: #b2bec3;">Serveur: <span style="color: var(--success)">Europe-1</span></p>
+            </div>
+        </aside>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

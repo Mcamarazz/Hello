@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soul Chronicles: L'Ascension - Connexion</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="landing-container">
+        <div class="hero-overlay"></div>
+        <div class="login-box">
+            <div class="logo-area">
+                <h1>SOUL CHRONICLES</h1>
+                <p class="subtitle">L'Ascension des Légendes</p>
+            </div>
+            
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="login">Connexion</button>
+                <button class="tab-btn" data-tab="register">Inscription</button>
+            </div>
+
+            <div id="login-form" class="auth-form active">
+                <form id="loginForm">
+                    <div class="input-group">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" name="email" placeholder="Email" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" name="password" placeholder="Mot de passe" required>
+                    </div>
+                    <button type="submit" class="action-btn glow-btn">ENTRER DANS L'ARÈNE</button>
+                </form>
+            </div>
+
+            <div id="register-form" class="auth-form">
+                <form id="registerForm">
+                    <div class="input-group">
+                        <i class="fas fa-user"></i>
+                        <input type="text" name="username" placeholder="Nom de Guerrier" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" name="email" placeholder="Email" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-globe"></i>
+                        <select name="country" required>
+                            <option value="France">France</option>
+                            <option value="Japan">Japon</option>
+                            <option value="USA">USA</option>
+                            <option value="Brazil">Brésil</option>
+                            <option value="Korea">Corée du Sud</option>
+                            <option value="Global">Autre</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" name="password" placeholder="Mot de passe" required>
+                    </div>
+                    <button type="submit" class="action-btn glow-btn">COMMENCER L'AVENTURE</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
